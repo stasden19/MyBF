@@ -20,8 +20,8 @@ int main(int argc, char const *argv[])
     string content((istreambuf_iterator<char>(in_file)), istreambuf_iterator<char>());
     // cout << (content[0] + 2);
     int position = 0;
-    int lenth = count(content.begin(), content.end(), '>');
-    int* poiters = (int*)malloc(lenth * sizeof(int));
+    int lenth = count(content.begin(), content.end(), '>') + 10;
+    int* poiters = (int*)malloc((lenth + 10)* sizeof(int));
     for (size_t i = 0; i < content.length(); i++)
     {
         switch (content[i])
@@ -33,8 +33,8 @@ int main(int argc, char const *argv[])
             position = position == 0 ? 0 : position - 1;
             break;
         case '+':
-            if (0 < (content[i + 1]) &  (int)(content[i + 1])< 10){
-                poiters[position] += (content[i + 1]);
+            if (0 < (content[i + 1] - '0') & (content[i + 1] - '0')< 10){
+                poiters[position] += (content[i + 1] - '0');
                 i++;
                 break;
             }
@@ -53,6 +53,13 @@ int main(int argc, char const *argv[])
         case ',':
             poiters[position] = content[i + 1];
             i++;
+            break;
+        case 'W':
+            cout << "\n\n\n";
+            for (int i = 0; i <= lenth; i++){
+                cout << static_cast<int>(poiters[i]) << ' ';
+            }
+            cout << endl;
             break;
         default:
             break;  
